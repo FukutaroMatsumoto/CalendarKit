@@ -293,11 +293,24 @@ public class TimelineView: UIView {
   func recalculateEventLayout() {
 
     // only non allDay events need their frames to be set
-    let sortedEvents = self.regularLayoutAttributes.sorted { (attr1, attr2) -> Bool in
+    var sortedEvents = self.regularLayoutAttributes.sorted { (attr1, attr2) -> Bool in
       let start1 = attr1.descriptor.startDate
       let start2 = attr2.descriptor.startDate
       return start1.isEarlier(than: start2)
     }
+    
+    for i in 0 ... sortedEvents.count - 1{
+        for j in 0 ... sortedEvents.count - 1{
+            if i == j {continue}
+            if (sortedEvents[i].descriptor.startDate<sortedEvents[j].descriptor.startDate&&sortedEvents[i].descriptor.endDate>sortedEvents[j].descriptor.startDate){
+                sortedEvents[i].descriptor.overWrapCount += 1
+                if(i>j){
+                    sortedEvents[i].descriptor.overWrapIndex += 1
+                }
+            }
+        }
+    }
+    
 
     var groupsOfEvents = [[EventLayoutAttributes]]()
     var overlappingEvents = [EventLayoutAttributes]()
@@ -338,13 +351,14 @@ public class TimelineView: UIView {
     overlappingEvents.removeAll()
 
     for overlappingEvents in groupsOfEvents {
-      let totalCount = CGFloat(overlappingEvents.count)
+      //let totalCount = CGFloat(overlappingEvents.count)
+        
       for (index, event) in overlappingEvents.enumerated() {
         let startY = dateToY(event.descriptor.datePeriod.beginning!)
         let endY = dateToY(event.descriptor.datePeriod.end!)
-        let floatIndex = CGFloat(index)
-        let x = style.leftInset + floatIndex / totalCount * calendarWidth
-        let equalWidth = calendarWidth / totalCount
+        let floatIndex = CGFloat(event.descriptor.overWrapIndex)
+        let x = style.leftInset + floatIndex / CGFloat(event.descriptor.overWrapCount) * calendarWidth //totalCount * calendarWidth
+        let equalWidth = calendarWidth / CGFloat(event.descriptor.overWrapCount)
         event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
       }
     }
