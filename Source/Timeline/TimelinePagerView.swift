@@ -127,8 +127,8 @@ public class TimelinePagerView: UIView {
     
     var events = dataSource.eventsForDate(date)
     for i in 0 ... events.count - 1{
-        events[i].overWrapIndex = 1
-        events[i].overWrapCount = 2
+        events[i].overWrapIndex = 0
+        events[i].overWrapCount = 1
         for j in 0 ... events.count - 1{
             if i == j {continue}
             if (events[i].startDate<events[j].startDate&&events[i].endDate>events[j].startDate){
