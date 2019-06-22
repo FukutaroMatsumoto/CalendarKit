@@ -124,7 +124,23 @@ public class TimelinePagerView: UIView {
   func updateTimeline(_ timeline: TimelineView) {
     guard let dataSource = dataSource else {return}
     let date = timeline.date.dateOnly(calendar: calendar)
-    let events = dataSource.eventsForDate(date)
+    
+    var events = dataSource.eventsForDate(date)
+    for i in 0 ... events.count - 1{
+        events[i].overWrapIndex = 1
+        events[i].overWrapCount = 2
+        for j in 0 ... events.count - 1{
+            if i == j {continue}
+            if (events[i].startDate<events[j].startDate&&events[i].endDate>events[j].startDate){
+                events[i].overWrapCount += 1
+                if(i>j){
+                    events[i].overWrapIndex += 1
+                }
+            }
+        }
+    }
+    
+    
     let day = TimePeriod(beginning: date,
                          chunk: TimeChunk.dateComponents(days: 1))
     let validEvents = events.filter{$0.datePeriod.overlaps(with: day)}

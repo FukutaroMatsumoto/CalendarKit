@@ -299,18 +299,7 @@ public class TimelineView: UIView {
       return start1.isEarlier(than: start2)
     }
     
-    for i in 0 ... sortedEvents.count - 1{
-        for j in 0 ... sortedEvents.count - 1{
-            if i == j {continue}
-            if (sortedEvents[i].descriptor.startDate<sortedEvents[j].descriptor.startDate&&sortedEvents[i].descriptor.endDate>sortedEvents[j].descriptor.startDate){
-                sortedEvents[i].descriptor.overWrapCount += 1
-                if(i>j){
-                    sortedEvents[i].descriptor.overWrapIndex += 1
-                }
-            }
-        }
-    }
-    
+
 
     var groupsOfEvents = [[EventLayoutAttributes]]()
     var overlappingEvents = [EventLayoutAttributes]()
