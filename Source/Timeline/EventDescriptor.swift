@@ -12,4 +12,5 @@ public protocol EventDescriptor {
   var backgroundColor: UIColor {get}
   var overWrapCount: Int {get set}
     var overWrapIndex: Int {get set}
+    var isModelSchedule:Bool {get}
 }

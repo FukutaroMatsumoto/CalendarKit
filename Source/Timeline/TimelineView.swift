@@ -343,6 +343,11 @@ public class TimelineView: UIView {
       //let totalCount = CGFloat(overlappingEvents.count)
         
       for (index, event) in overlappingEvents.enumerated() {
+        if(event.descriptor.isModelSchedule){
+            event.descriptor.overlappingEvents = 5
+            event.descriptor.overWrapIndex = 4
+        }
+        
         let startY = dateToY(event.descriptor.datePeriod.beginning!)
         let endY = dateToY(event.descriptor.datePeriod.end!)
         let floatIndex = CGFloat(event.descriptor.overWrapIndex)

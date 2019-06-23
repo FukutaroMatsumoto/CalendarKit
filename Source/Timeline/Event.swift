@@ -21,4 +21,5 @@ open class Event: EventDescriptor {
   public init() {}
     public var overWrapCount = 1
     public var overWrapIndex = 0
+    public var isModelSchedule = false
 }
