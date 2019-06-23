@@ -19,7 +19,7 @@ open class Event: EventDescriptor {
   public var font = UIFont.boldSystemFont(ofSize: 12)
   public var userInfo: Any?
   public init() {}
-    public var overWrapCount = 1
-    public var overWrapIndex = 0
+    public var overLapCount = 1
+    public var overLapIndex = 0
     public var isModelSchedule = false
 }
