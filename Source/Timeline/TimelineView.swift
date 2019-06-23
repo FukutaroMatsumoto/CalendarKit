@@ -344,7 +344,7 @@ public class TimelineView: UIView {
         
       for (index, event) in overlappingEvents.enumerated() {
         if(event.descriptor.isModelSchedule){
-            event.descriptor.overlappingEvents = 5
+            event.descriptor.overWrapCount = 5
             event.descriptor.overWrapIndex = 4
         }
         
