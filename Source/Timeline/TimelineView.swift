@@ -198,7 +198,7 @@ public class TimelineView: UIView {
     }
 
     let mutableParagraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
-    mutableParagraphStyle.lineBreakMode = .byWordLapping
+    mutableParagraphStyle.lineBreakMode = .byWordWrapping
     mutableParagraphStyle.alignment = .right
     let paragraphStyle = mutableParagraphStyle.copy() as! NSParagraphStyle
 
@@ -346,14 +346,22 @@ public class TimelineView: UIView {
         if(event.descriptor.isModelSchedule){
             event.descriptor.overLapCount = 5
             event.descriptor.overLapIndex = 4
+            let startY = dateToY(event.descriptor.datePeriod.beginning!)
+            let endY = dateToY(event.descriptor.datePeriod.end!)
+            let floatIndex = CGFloat(event.descriptor.overLapIndex)
+            let x = style.leftInset + floatIndex / CGFloat(event.descriptor.overLapCount) * calendarWidth //totalCount * calendarWidth
+            let equalWidth = calendarWidth / CGFloat(event.descriptor.overLapCount)
+            event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
+        }else{
+            let startY = dateToY(event.descriptor.datePeriod.beginning!)
+            let endY = dateToY(event.descriptor.datePeriod.end!)
+            let floatIndex = CGFloat(index)
+            let x = style.leftInset + floatIndex / CGFloat(event.descriptor.overLapCount) * calendarWidth //totalCount * calendarWidth
+            let equalWidth = calendarWidth / CGFloat(event.descriptor.overLapCount)
+            event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
         }
         
-        let startY = dateToY(event.descriptor.datePeriod.beginning!)
-        let endY = dateToY(event.descriptor.datePeriod.end!)
-        let floatIndex = CGFloat(event.descriptor.overLapIndex)
-        let x = style.leftInset + floatIndex / CGFloat(event.descriptor.overLapCount) * calendarWidth //totalCount * calendarWidth
-        let equalWidth = calendarWidth / CGFloat(event.descriptor.overLapCount)
-        event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
+
       }
     }
   }
