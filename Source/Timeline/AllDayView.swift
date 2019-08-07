@@ -18,7 +18,7 @@ public class AllDayView: UIView {
   
   private lazy var textLabel: UILabel = {
     let label = UILabel(frame: CGRect(x: 8.0, y: 4.0, width: allDayLabelWidth, height: 24.0))
-    label.text = "all-day"
+    label.text = "終日"
     label.autoresizingMask = [.flexibleWidth]
     
     return label
@@ -81,9 +81,23 @@ public class AllDayView: UIView {
     let maxAllDayViewHeight = allDayEventHeight * 2 + allDayEventHeight * 0.5
     heightAnchor.constraint(lessThanOrEqualToConstant: maxAllDayViewHeight).isActive = true
     
+    
+    // ジェスチャーの生成
+    var tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.tapGesture(_:)))
+    sv.addGestureRecognizer(tapGestureRecognizer)
+    
     return sv
   }()
   
+    @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer){
+        // タップviewの色を変える (Red <=> Blue)
+        if(scrollView.backgroundColor  == .red) {
+            scrollView.backgroundColor = .blue
+        }
+        else {
+            scrollView.backgroundColor = .red
+        }
+    }
   // MARK: - RETURN VALUES
   
   override init(frame: CGRect) {
