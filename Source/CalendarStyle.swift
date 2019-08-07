@@ -142,7 +142,7 @@ public class CurrentTimeIndicatorStyle: NSCopying {
 }
 
 public class AllDayStyle: NSCopying {
-  public var backgroundColor: UIColor = UIColor.lightGray
+  public var backgroundColor: UIColor = .groupTableViewBackground
   public var allDayFont = UIFont.systemFont(ofSize: 12.0)
   public var allDayColor: UIColor = UIColor.black
   
