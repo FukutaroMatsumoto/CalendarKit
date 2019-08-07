@@ -78,7 +78,7 @@ public class AllDayView: UIView {
     sv.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
     bottomAnchor.constraint(equalTo: sv.bottomAnchor, constant: 2).isActive = true
     
-    let maxAllDayViewHeight = allDayEventHeight * 2 + allDayEventHeight * 0.5
+    let maxAllDayViewHeight = allDayEventHeight * 12 + allDayEventHeight * 0.5
     heightAnchor.constraint(lessThanOrEqualToConstant: maxAllDayViewHeight).isActive = true
     
     
@@ -90,13 +90,7 @@ public class AllDayView: UIView {
   }()
   
     @objc func tapGesture(_ gestureRecognizer: UITapGestureRecognizer){
-        // タップviewの色を変える (Red <=> Blue)
-        if(scrollView.backgroundColor  == .red) {
-            scrollView.backgroundColor = .blue
-        }
-        else {
-            scrollView.backgroundColor = .red
-        }
+       print("AllDayViewがタップされました。")
     }
   // MARK: - RETURN VALUES
   
