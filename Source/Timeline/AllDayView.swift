@@ -180,6 +180,8 @@ public class AllDayView: UIView {
       horizontalStackView.addArrangedSubview(eventView)
     }
     
+        self.bounds = CGRect(x: 0, y: 0, width: self.bounds.width, height: verticalStackView.frame.height )
+    
     // add vert. stack view inside, pin vert. stack view, update content view by the number of horz. stack views
     verticalStackView.translatesAutoresizingMaskIntoConstraints = false
     scrollView.addSubview(verticalStackView)
