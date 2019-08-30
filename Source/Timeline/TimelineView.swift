@@ -349,9 +349,9 @@ public class TimelineView: UIView {
             let startY = dateToY(event.descriptor.datePeriod.beginning!)
             let endY = dateToY(event.descriptor.datePeriod.end!)
             let floatIndex = CGFloat(event.descriptor.overLapIndex)
-            let x = style.leftInset + floatIndex / CGFloat(event.descriptor.overLapCount) * calendarWidth //totalCount * calendarWidth
-            let equalWidth = calendarWidth / CGFloat(event.descriptor.overLapCount)
-            event.frame = CGRect(x: x, y: startY, width: equalWidth, height: endY - startY)
+            let eventWidth = CGFloat(60)
+            let x = width - eventWidth
+            event.frame = CGRect(x: x, y: startY, width: eventWidth, height: endY - startY)
         }else{
             let startY = dateToY(event.descriptor.datePeriod.beginning!)
             let endY = dateToY(event.descriptor.datePeriod.end!)
